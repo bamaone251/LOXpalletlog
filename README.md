@@ -57,3 +57,4 @@ For installation on phones/desktops, serve the app over HTTPS (or localhost). Th
 
 The service worker caches only the application shell. `/api/*` and `/uploads/*` stay network-only so database entries and evidence photos remain live.
 # LOXerrorlog
+# errorlog

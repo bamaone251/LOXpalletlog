@@ -1,0 +1,14 @@
+services:
+  selector-error:
+    build: .
+    container_name: selector-error
+    restart: unless-stopped
+    ports:
+      - "3026:3026"
+    environment:
+      NODE_ENV: production
+      PORT: 3026
+      DATA_DIR: /app/data
+    volumes:
+      - ./data:/app/data
+    init: true

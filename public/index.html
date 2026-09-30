@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#123f4d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Selector Errors" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
+  <title>Lox Pallet Police</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="title">Selector Error Log</div>
+    </div>
+    <div class="topbar-actions">
+      <span class="status" id="statusPill">Loading…</span>
+      <button id="newEntryBtn" class="btn primary" type="button">+ New Entry</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="toolbar">
+      <input id="searchInput" class="search" type="search" placeholder="Search store, zone, oLPN, selector, notes, status…" autocomplete="off" />
+      <span class="entry-count" id="entryCount"></span>
+    </section>
+
+    <section id="gallery" class="gallery">
+      <p class="muted">Loading…</p>
+    </section>
+  </main>
+
+  <!-- New Entry Modal -->
+  <div id="entryModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="New pallet issue entry">
+    <div class="modalCard">
+      <div class="modalTop">
+        <div class="modalTitle">Document Pallet Issue</div>
+        <button id="closeEntryBtn" class="btn secondary" type="button">Close</button>
+      </div>
+
+      <div class="modalBody">
+        <form id="entryForm" class="form" autocomplete="off">
+          <label class="olpnField">
+            <span>oLPN # (scan label QR)</span>
+            <div class="olpnRow">
+              <input id="olpnInput" placeholder="Scan / type" required />
+              <button id="scanBtn" class="btn scan" type="button" title="Scan QR / barcode">Scan</button>
+            </div>
+          </label>
+
+          <div class="grid-2x2">
+            <label>
+              <span>Store</span>
+              <input id="storeInput" placeholder="FE11" required />
+            </label>
+
+            <label>
+              <span>Zone</span>
+              <select id="zoneInput" required>
+                <option>AMB</option><option>CHL</option><option>DP</option><option>FRZ</option><option>BRD</option>
+              </select>
+            </label>
+
+            <label>
+              <span>OCL</span>
+              <input id="oclInput" placeholder="1" inputmode="numeric" />
+            </label>
+
+            <label>
+              <span>Selector</span>
+              <input id="selectorInput" placeholder="Selector's name" required />
+            </label>
+          </div>
+
+          <div class="photo-fields">
+            <label class="photo-picker">
+              <span>Pallet Photo(s) — up to 2</span>
+              <input id="palletPhotosInput" type="file" accept="image/*" multiple />
+            </label>
+            <div id="palletPreview" class="photo-preview"></div>
+
+            <label class="photo-picker">
+              <span>Label Photo</span>
+              <input id="labelPhotoInput" type="file" accept="image/*" />
+            </label>
+            <div id="labelPreview" class="photo-preview"></div>
+          </div>
+
+          <label>
+            <span>Issue Notes (optional)</span>
+            <textarea id="notesInput" rows="3" maxlength="1000" placeholder="What's wrong with this pallet?"></textarea>
+          </label>
+
+          <button class="btn full primary" type="submit">Save Entry</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scan Modal -->
+  <div id="scanModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Scan barcode">
+    <div class="modalCard">
+      <div class="modalTop">
+        <div class="modalTitle">Scan oLPN Barcode / QR</div>
+        <button id="closeScanBtn" class="btn secondary" type="button">Close</button>
+      </div>
+
+      <div class="modalBody">
+        <video id="scanVideo" class="scanVideo" autoplay playsinline muted></video>
+        <div class="scanHint">
+          Hold the barcode or QR code inside the frame. It will fill the oLPN field automatically.
+        </div>
+        <div class="scanError" id="scanError"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="modal hidden" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <div class="lightboxCard">
+      <button id="closeLightboxBtn" class="btn secondary lightboxClose" type="button">Close</button>
+      <img id="lightboxImg" src="" alt="Pallet photo" />
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>

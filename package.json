@@ -1,0 +1,15 @@
+{
+  "name": "lox-plb-log-sync",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Lox PLB Log - pallet issue photo/QR logger with card gallery, synced across users via Node + SQLite + SSE",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.0.2",
+    "sqlite3": "^5.1.7"
+  }
+}
